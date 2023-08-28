@@ -1,12 +1,13 @@
 import {ReactElement} from 'react';
-import {Route} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
+import {Home} from './container';
 // const plugin = require('client/plugin.js');
 
 export const AppRoute: { [k: string]: { path: string, component: ReactElement } } = {
-    // home: {
-    //     path: '/',
-    //     component: Home
-    // },
+    home: {
+        path: '/',
+        component: <Home/>
+    },
     // group: {
     //     path: '/group',
     //     component: Group
@@ -39,18 +40,20 @@ export const AppRoute: { [k: string]: { path: string, component: ReactElement } 
 export default function AppRoutes() {
     return (
         <div className="router-container">
-            {Object.keys(AppRoute).map(key => {
-                const item = AppRoute[key];
-                switch (key) {
-                    case 'login':
-                        return <Route key={key} path={item.path} element={item.component}/>;
-                    case 'home':
-                        return <Route key={key} path={item.path} element={item.component}/>;
-                    default:
-                        return <Route key={key} path={item.path}
-                                      element={/*requireAuthentication*/(item.component)}/>;
-                }
-            })}
+            <Routes>
+                {Object.keys(AppRoute).map(key => {
+                    const item = AppRoute[key];
+                    switch (key) {
+                        case 'login':
+                            return <Route key={key} path={item.path} element={item.component}/>;
+                        case 'home':
+                            return <Route key={key} path={item.path} element={item.component}/>;
+                        default:
+                            return <Route key={key} path={item.path}
+                                          element={/*requireAuthentication*/(item.component)}/>;
+                    }
+                })}
+            </Routes>
         </div>
     );
 }
