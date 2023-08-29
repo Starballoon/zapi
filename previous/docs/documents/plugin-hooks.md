@@ -256,7 +256,7 @@ hooks = {
   },
   login: {
     path: '/login',
-    component: Login
+    component: LoginForm
   }
 };
 };

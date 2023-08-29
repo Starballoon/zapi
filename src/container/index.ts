@@ -1,3 +1,3 @@
 import Home from './Home/index..tsx';
-
-export {Home};
+import Login from './Login';
+export {Home, Login};

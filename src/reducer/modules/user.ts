@@ -13,7 +13,7 @@ import {AppDispatch} from '../../store.ts';
 // const FINISH_STUDY = 'yapi/user/FINISH_STUDY';
 // const SET_IMAGE_URL = 'yapi/user/SET_IMAGE_URL';
 
-// Login State Enum
+// LoginForm State Enum
 export const LOADING_STATUS = 0;
 export const GUEST_STATUS = 1;
 export const MEMBER_STATUS = 2;
@@ -137,20 +137,19 @@ export const checkLoginState = () => async (dispatch: AppDispatch) => {
     dispatch(checkLoginStateInner(await axios.get('/api/user/status')));
 };
 
-export const loginActions = (data: unknown) => async (dispatch: AppDispatch) => {
-    dispatch(loginActionsInner(await axios.post('/api/user/login', data)));
-};
-export const loginLdapActions = (data: unknown) => async (dispatch: AppDispatch) => {
-    dispatch(loginActionsInner(await axios.post('/api/user/login_by_ldap', data)));
-};
+export const loginActions = (data: unknown): { payload: Promise<unknown>, type: string } =>
+    loginActionsInner(axios.post('/api/user/login', data));
 
-export const regActions = (data: { email: string, password: string, userName: string }) => async (dispatch: AppDispatch) => {
-    dispatch(registerActionsInner(axios.post('/api/user/req', {
+export const loginLdapActions = (data: unknown): { payload: Promise<unknown>, type: string } =>
+    loginActionsInner(axios.post('/api/user/login_by_ldap', data));
+
+export const regActions = (data: { email: string, password: string, userName: string }):
+    { payload: Promise<unknown>, type: string } =>
+    registerActionsInner(axios.post('/api/user/req', {
         email: data.email,
         password: data.password,
         username: data.userName
-    })));
-};
+    }));
 
 export const logoutActions = (): { payload: Promise<unknown>, type: string } =>
     logoutActionsInner(axios.get('/api/user/logout'));

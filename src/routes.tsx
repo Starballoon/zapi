@@ -1,6 +1,6 @@
 import {ReactElement} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import {Home} from './container';
+import {Home, Login} from './container';
 // const plugin = require('client/plugin.js');
 
 export const AppRoute: { [k: string]: { path: string, component: ReactElement } } = {
@@ -28,10 +28,10 @@ export const AppRoute: { [k: string]: { path: string, component: ReactElement } 
     //     path: '/add-project',
     //     component: AddProject
     // },
-    // login: {
-    //     path: '/login',
-    //     component: Login
-    // }
+    login: {
+        path: '/login',
+        component: <Login/>
+    }
 };
 
 // 增加路由钩子
